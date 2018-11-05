@@ -29,7 +29,7 @@ def tokenize_text(text, vsize=10000, res=Toks.TOTAL_RES, unk_idx=Toks.UNK,
                 add_line = line
         else:
             if lower_case:
-                add_line = line.lower().split()
+                add_line = line.low3er().split()
             else:
                 add_line = line.split()
         tt.append(add_line)
@@ -60,8 +60,7 @@ def tokenize_text(text, vsize=10000, res=Toks.TOTAL_RES, unk_idx=Toks.UNK,
     return idx_to_word, word_to_idx, tok_text, bias
 
 
-def untokenize(sent, idx_to_word,
-               unk_idx=Toks.UNK,
+def untokenize(sent, idx_to_word, unk_idx=Toks.UNK,
                eos_idx=Toks.EOS, to_text=False, suffix_token=None):
     text = []
     for s in sent:

@@ -31,7 +31,7 @@ def generate(enc, dec, feats, len_=20, device=torch.device('cpu')):
     enc.eval()
     dec.eval()
     with torch.no_grad():
-        hid_enc = enc(feats).unsqueeze(0)
+        hid_enc = enc(feats).unsqueeze(0)      # [1, batch, 512]
 
         # run the decoder step by step
         dec_tensor = torch.zeros(feats.shape[0], len_ + 1, dtype=torch.long)
@@ -58,8 +58,9 @@ def img2text(input_, model_path, device=torch.device('cpu')):
 
     with torch.no_grad():
         batch_feats_tensor = cnn(input_)  # [batch, 2048]
-    dec_tensor = generate(enc, dec, batch_feats_tensor, device=device)  # [batch,
-    #  21]
+
+    dec_tensor = generate(enc, dec, batch_feats_tensor, device=device)
+    # [batch, 21]
 
     untok = []  # save the word
     for i in range(dec_tensor.shape[0]):
